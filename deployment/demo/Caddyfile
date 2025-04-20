@@ -1,0 +1,6 @@
+{$DOMAIN} {
+    tls {
+        dns cloudflare {$CLOUDFLARE_API_TOKEN}
+    }
+    reverse_proxy url-instax:8890
+}
