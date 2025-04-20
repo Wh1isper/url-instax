@@ -28,3 +28,8 @@ runs:
     - name: Install Python dependencies
       run: uv sync --frozen
       shell: bash
+
+    - name: Install playwright
+      run: |
+        uv run playwright install
+      shell: bash

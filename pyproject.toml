@@ -16,6 +16,17 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+dependencies = [
+    "click>=8.1.8",
+    "fastapi>=0.115.12",
+    "httpx>=0.28.1",
+    "loguru>=0.7.3",
+    "mcp[cli]>=1.6.0",
+    "playwright>=1.51.0",
+    "pydantic>=2.11.3",
+    "python-dotenv>=1.1.0",
+    "uvicorn[standard]>=0.34.2",
+]
 
 [project.urls]
 Homepage = "https://wh1isper.github.io/url-instax/"
@@ -89,10 +100,12 @@ ignore = [
     "E501",
     # DoNotAssignLambda
     "E731",
+    "TRY003",
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S101"]
+"url_instax/config.py" = ["E402"]
 
 [tool.ruff.format]
 preview = true
@@ -103,3 +116,6 @@ skip_empty = true
 [tool.coverage.run]
 branch = true
 source = ["url_instax"]
+
+[project.scripts]
+url-instax = "url_instax.cli:cli"
