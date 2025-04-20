@@ -6,6 +6,7 @@ This directory contains the necessary files to deploy URL-Instax using Docker Co
 
 - `docker-compose.yaml`: The main Docker Compose configuration file
 - `Caddyfile`: Configuration for the Caddy reverse proxy
+- `Dockerfile.caddy`: Dockerfile to build Caddy with Cloudflare DNS provider
 - `.env.example`: Example environment variables file (copy to `.env` and update with your values)
 
 ## Setup Instructions
