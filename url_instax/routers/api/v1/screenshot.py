@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Query, Response
+from fastapi import APIRouter, Query, Response, status
 from pydantic import BaseModel
 
 from url_instax.log import logger
-from url_instax.main import take_screenshot
+from url_instax.main import ScreenshotError, take_screenshot
 
 router = APIRouter(
     tags=["Component"],
@@ -19,6 +19,14 @@ def response_image(
         headers={
             "Content-Disposition": "inline; filename=screenshot.png",
         },
+    )
+
+
+def response_error(exception: ScreenshotError) -> Response:
+    return Response(
+        content=str(exception),
+        media_type="text/plain",
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
     )
 
 

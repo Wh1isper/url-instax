@@ -3,11 +3,15 @@ from playwright.async_api import async_playwright
 from url_instax.log import logger
 
 
-class FailedToInitializeError(RuntimeError):
+class ScreenshotError(Exception):
     pass
 
 
-class FailedToTakeScreenshotError(RuntimeError):
+class FailedToInitializeError(ScreenshotError):
+    pass
+
+
+class FailedToTakeScreenshotError(ScreenshotError):
     pass
 
 
@@ -39,7 +43,9 @@ async def take_screenshot(
                 is_mobile=is_mobile,
             )
         except Exception as e:
-            raise FailedToInitializeError(f"Failed to initialize Playwright: {e}") from e
+            raise FailedToInitializeError(
+                f"Failed to initialize Playwright: {e}, try `playwright install` or `uv tool run playwright install"
+            ) from e
         try:
             await page.goto(url)
             if wait_for:
