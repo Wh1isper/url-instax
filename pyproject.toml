@@ -17,6 +17,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "aiocache>=0.12.3",
     "click>=8.1.8",
     "fastapi>=0.115.12",
     "httpx>=0.28.1",
