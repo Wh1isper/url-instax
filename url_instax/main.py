@@ -1,4 +1,4 @@
-from aiocache import SimpleMemoryCache, cached
+from aiocache import cached
 from playwright.async_api import async_playwright
 
 from url_instax.log import logger
@@ -22,10 +22,7 @@ def _get_url_instax_headers():
     }
 
 
-cache = SimpleMemoryCache()
-
-
-@cached(cache)
+@cached(ttl=300)
 async def take_screenshot(
     url: str,
     width: int = 1280,
