@@ -1,2 +1,3 @@
-def test_hello():
-    assert "hello" == "hello"
+def test_hello(client):
+    response = client.get("/")
+    assert response.status_code == 200
