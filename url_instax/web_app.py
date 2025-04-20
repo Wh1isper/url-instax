@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Response
@@ -7,6 +8,8 @@ from url_instax.log import logger
 
 from .routers.api.v1 import routers as v1_routers
 
+CURRENT_SERVER_LOCATION = os.environ.get("CURRENT_SERVER_LOCATION", "http://localhost:8890")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -15,7 +18,19 @@ async def lifespan(app: FastAPI):
         logger.info("API_TOKEN set, authentication is enabled")
     else:
         logger.info("API_TOKEN not set, authentication is disabled")
+    openapi_schema = app.openapi()
+    openapi_schema["components"]["securitySchemes"] = {
+        "BearerAuth": {
+            "type": "http",
+            "scheme": "bearer",
+        }
+    }
+    openapi_schema["security"] = [{"BearerAuth": []}]
 
+    openapi_schema["servers"] = [
+        {"url": CURRENT_SERVER_LOCATION, "description": "Current Server"},
+    ]
+    app.openapi_schema = openapi_schema
     yield
 
 
