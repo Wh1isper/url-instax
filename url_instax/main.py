@@ -28,6 +28,8 @@ cache = SimpleMemoryCache()
 @cached(cache)
 async def take_screenshot(
     url: str,
+    width: int = 1280,
+    height: int = 720,
     user_agent: str | None = None,
     extra_http_headers: dict[str, str] | None = None,
     is_mobile: bool | None = None,
@@ -43,6 +45,7 @@ async def take_screenshot(
         try:
             browser = await p.chromium.launch()
             page = await browser.new_page(
+                viewport={"width": width, "height": height},
                 user_agent=user_agent,
                 extra_http_headers=extra_http_headers,
                 is_mobile=is_mobile,

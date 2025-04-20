@@ -45,11 +45,21 @@ async def screenshot_get(
         True,
         description="Whether to take a full page screenshot",
     ),
+    width: int = Query(
+        1280,
+        description="Width of the viewport",
+    ),
+    height: int = Query(
+        720,
+        description="Height of the viewport",
+    ),
 ) -> Response:
     logger.debug(f"Taking screenshot of {url}")
     return response_image(
         await take_screenshot(
             url=url,
+            width=width,
+            height=height,
             is_mobile=is_mobile,
             timeout=timeout,
             full_page=full_page,
@@ -65,6 +75,8 @@ class ScreenshotParams(BaseModel):
     timeout: float = 30
     full_page: bool = True
     wait_for: int | None = None
+    width: int = 1280
+    height: int = 720
 
 
 @router.post("/screenshot")
@@ -75,6 +87,8 @@ async def screenshot_post(
     return response_image(
         await take_screenshot(
             url=params.url,
+            width=params.width,
+            height=params.height,
             user_agent=params.user_agent,
             extra_http_headers=params.extra_http_headers,
             is_mobile=params.is_mobile,
