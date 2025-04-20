@@ -112,12 +112,14 @@ ignore = [
 [tool.ruff.format]
 preview = true
 
+
 [tool.coverage.report]
 skip_empty = true
 
 [tool.coverage.run]
 branch = true
 source = ["url_instax"]
+omit = ["tests/*", "url_instax/cli.py"]
 
 [project.scripts]
 url-instax = "url_instax.cli:cli"
