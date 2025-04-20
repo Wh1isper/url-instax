@@ -27,7 +27,7 @@ cp .env.example .env
 1. Start the services:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Cloudflare API Token Setup
