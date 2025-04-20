@@ -21,5 +21,6 @@ COPY . /app
 # Sync the project
 RUN uv sync --frozen
 
+EXPOSE 8890
 ENTRYPOINT [ "tini", "--", "uv", "run", "url-instax"]
-CMD ["start"]
+CMD ["http"]
