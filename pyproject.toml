@@ -17,6 +17,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 dependencies = [
+    "aiocache>=0.12.3",
     "click>=8.1.8",
     "fastapi>=0.115.12",
     "httpx>=0.28.1",
@@ -111,12 +112,14 @@ ignore = [
 [tool.ruff.format]
 preview = true
 
+
 [tool.coverage.report]
 skip_empty = true
 
 [tool.coverage.run]
 branch = true
 source = ["url_instax"]
+omit = ["tests/*", "url_instax/cli.py"]
 
 [project.scripts]
 url-instax = "url_instax.cli:cli"
