@@ -1,5 +1,4 @@
-version: '3'
-
+name: url-instax
 services:
   url-instax:
     image: ghcr.io/wh1isper/url-instax:latest
